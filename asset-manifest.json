@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.0996b80c.chunk.css",
-    "main.js": "/static/js/main.7270144a.chunk.js",
-    "main.js.map": "/static/js/main.7270144a.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.4e98f75e.js",
-    "runtime-main.js.map": "/static/js/runtime-main.4e98f75e.js.map",
-    "static/js/2.5f418296.chunk.js": "/static/js/2.5f418296.chunk.js",
-    "static/js/2.5f418296.chunk.js.map": "/static/js/2.5f418296.chunk.js.map",
-    "static/js/3.ac1a4eff.chunk.js": "/static/js/3.ac1a4eff.chunk.js",
-    "static/js/3.ac1a4eff.chunk.js.map": "/static/js/3.ac1a4eff.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.0996b80c.chunk.css.map": "/static/css/main.0996b80c.chunk.css.map",
-    "static/js/2.5f418296.chunk.js.LICENSE.txt": "/static/js/2.5f418296.chunk.js.LICENSE.txt"
+    "main.css": "/stitchify/static/css/main.0996b80c.chunk.css",
+    "main.js": "/stitchify/static/js/main.7270144a.chunk.js",
+    "main.js.map": "/stitchify/static/js/main.7270144a.chunk.js.map",
+    "runtime-main.js": "/stitchify/static/js/runtime-main.040e0bae.js",
+    "runtime-main.js.map": "/stitchify/static/js/runtime-main.040e0bae.js.map",
+    "static/js/2.5f418296.chunk.js": "/stitchify/static/js/2.5f418296.chunk.js",
+    "static/js/2.5f418296.chunk.js.map": "/stitchify/static/js/2.5f418296.chunk.js.map",
+    "static/js/3.ac1a4eff.chunk.js": "/stitchify/static/js/3.ac1a4eff.chunk.js",
+    "static/js/3.ac1a4eff.chunk.js.map": "/stitchify/static/js/3.ac1a4eff.chunk.js.map",
+    "index.html": "/stitchify/index.html",
+    "static/css/main.0996b80c.chunk.css.map": "/stitchify/static/css/main.0996b80c.chunk.css.map",
+    "static/js/2.5f418296.chunk.js.LICENSE.txt": "/stitchify/static/js/2.5f418296.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4e98f75e.js",
+    "static/js/runtime-main.040e0bae.js",
     "static/js/2.5f418296.chunk.js",
     "static/css/main.0996b80c.chunk.css",
     "static/js/main.7270144a.chunk.js"
