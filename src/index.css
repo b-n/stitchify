@@ -5,15 +5,5 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-input, button { 
-  margin-bottom: 10px;
+  background-color: #FAFAFA;
 }

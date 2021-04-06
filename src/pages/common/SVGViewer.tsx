@@ -1,21 +1,21 @@
 import React, {useRef, useEffect, useState} from 'react';
 
-import { ReactSVGPanZoom, TOOL_NONE, INITIAL_VALUE} from 'react-svg-pan-zoom';
+import { ReactSVGPanZoom, TOOL_AUTO, INITIAL_VALUE} from 'react-svg-pan-zoom';
 
 interface SVGViewerProps {
   children: React.ReactNode;
   width?: number;
   height?: number;
+  onClick?: (event: any) => void;
 }
 
 const SVGViewer: React.FC<SVGViewerProps> = ({
   children,
-  width = 1000,
-  height = 1000,
+  onClick,
 }) => {
   const Viewer = useRef<typeof ReactSVGPanZoom>(null);
 
-  const [tool, setTool] = useState(TOOL_NONE)
+  const [tool, setTool] = useState(TOOL_AUTO)
   const [value, setValue] = useState(INITIAL_VALUE)
 
   useEffect(() => {
@@ -23,18 +23,16 @@ const SVGViewer: React.FC<SVGViewerProps> = ({
   }, []);
 
   return (
-    <div style={{border: '1px solid black'}}>
-      <ReactSVGPanZoom
-        ref={Viewer}
-        width={width} height={height}
-        tool={tool} onChangeTool={setTool}
-        value={value} onChangeValue={setValue}
-        detectAutoPan={false}
-        onClick={(event: any) => console.log('click', event.x, event.y, event.originalEvent)}
-      >
-        {children}
-      </ReactSVGPanZoom>
-    </div>
+    <ReactSVGPanZoom
+      ref={Viewer}
+      width={1000} height={600}
+      tool={tool} onChangeTool={setTool}
+      value={value} onChangeValue={setValue}
+      detectAutoPan={false}
+      onClick={onClick}
+    >
+      {children}
+    </ReactSVGPanZoom>
   )
 }
 

@@ -1,8 +1,10 @@
+import { TwoDimensions } from '../types/util'
+
 export type RGBPixel = [number, number, number];
 export type HexPixel = string;
 
 export class ImageReader {
-  targetDimensions: [number, number] = [0,0];
+  dimensions: TwoDimensions | null = null;
   width: number | null = null;
   height: number | null = null;
 
@@ -14,14 +16,13 @@ export class ImageReader {
     const image = await this.getImage(imageDataBase64)
     const { width, height } = image
 
-    this.width = width
-    this.height = height
+    this.dimensions = [ width, height ];
     this.canvas = this.getCanvasFromImage(image);
   }
 
-  pixel = (x: number, y: number): HexPixel => {
+  pixel = (x: number, y: number, scaling: TwoDimensions): HexPixel => {
     const canvas = this.getCanvas();
-    const [ targetWidth, targetHeight ] = this.targetDimensions
+    const [ targetWidth, targetHeight ] = scaling
 
     const [
       widthRatio,
@@ -42,7 +43,7 @@ export class ImageReader {
   }
 
   hasDimensions = () => {
-    return this.width && this.height;
+    return this.dimensions && this.dimensions.length === 2;
   }
 
   private getImage = async (base64: string): Promise<HTMLImageElement> => {
