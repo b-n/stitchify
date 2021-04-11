@@ -43,12 +43,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:12.8.3"],
             ["@types/chroma-js", "npm:2.1.3"],
             ["@types/jest", "npm:26.0.22"],
+            ["@types/lodash.chunk", "npm:4.2.6"],
             ["@types/node", "npm:12.20.7"],
             ["@types/react", "npm:17.0.3"],
             ["@types/react-dom", "npm:17.0.3"],
             ["chroma-js", "npm:2.1.1"],
             ["eslint-config-react-app", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:6.0.0"],
             ["gh-pages", "npm:3.1.0"],
+            ["lodash.chunk", "npm:4.2.0"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:17.0.2"],
             ["react-scripts", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:4.0.3"],
@@ -5135,6 +5137,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-66e9ac0143.zip/node_modules/@types/json5/",
           "packageDependencies": [
             ["@types/json5", "npm:0.0.29"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/lodash", [
+        ["npm:4.14.168", {
+          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.168-2d65abe211-9a4e25f89f.zip/node_modules/@types/lodash/",
+          "packageDependencies": [
+            ["@types/lodash", "npm:4.14.168"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/lodash.chunk", [
+        ["npm:4.2.6", {
+          "packageLocation": "./.yarn/cache/@types-lodash.chunk-npm-4.2.6-a1552e811d-23486c05be.zip/node_modules/@types/lodash.chunk/",
+          "packageDependencies": [
+            ["@types/lodash.chunk", "npm:4.2.6"],
+            ["@types/lodash", "npm:4.14.168"]
           ],
           "linkType": "HARD",
         }]
@@ -13621,6 +13642,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["lodash.chunk", [
+        ["npm:4.2.0", {
+          "packageLocation": "./.yarn/cache/lodash.chunk-npm-4.2.0-a54ef4d7dd-c037c4a521.zip/node_modules/lodash.chunk/",
+          "packageDependencies": [
+            ["lodash.chunk", "npm:4.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["lodash.memoize", [
         ["npm:4.1.2", {
           "packageLocation": "./.yarn/cache/lodash.memoize-npm-4.1.2-0e6250041f-080c1095b7.zip/node_modules/lodash.memoize/",
@@ -18475,12 +18505,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/user-event", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:12.8.3"],
             ["@types/chroma-js", "npm:2.1.3"],
             ["@types/jest", "npm:26.0.22"],
+            ["@types/lodash.chunk", "npm:4.2.6"],
             ["@types/node", "npm:12.20.7"],
             ["@types/react", "npm:17.0.3"],
             ["@types/react-dom", "npm:17.0.3"],
             ["chroma-js", "npm:2.1.1"],
             ["eslint-config-react-app", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:6.0.0"],
             ["gh-pages", "npm:3.1.0"],
+            ["lodash.chunk", "npm:4.2.0"],
             ["react", "npm:17.0.2"],
             ["react-dom", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:17.0.2"],
             ["react-scripts", "virtual:ce55fc1b1275e5933331af66d07bb81eb373d5b50c6a738e04f82895eaebfdb680f7b73e6f1e81386408ed6a7c23688af14157c903808f2374c70fdbe203529a#npm:4.0.3"],

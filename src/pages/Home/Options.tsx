@@ -11,7 +11,6 @@ export interface GenerationOptions {
   displayAs: DisplayOptions;
 }
 
-
 export const INITIAL_OPTIONS: GenerationOptions = { 
   targetDimensions: [100, 100],
   autoAdjustAspectRatio: true,

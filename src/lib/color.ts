@@ -1,15 +1,7 @@
-import { deltaE } from 'chroma-js';
+import chroma, { deltaE } from 'chroma-js';
 import dmc from '../data/dmc'
 
-export type RGBColor = Uint8ClampedArray;
-export type HexColor = string;
-
-export interface DMCColor {
-  id: string;
-  name: string;
-  rgb: RGBColor
-  hex: HexColor
-}
+import { DMCColor, HexColor } from '../types/colors'
 
 const dmcCache: Array<DMCColor> = [];
 
@@ -27,24 +19,31 @@ const loadDMCCache = () => {
   return dmcCache;
 }
 
-const closestDMC = (color: HexColor): DMCColor => {
-  const dmcs = loadDMCCache();
+const closestDMC = async (color: HexColor): Promise<DMCColor> => {
+  return new Promise((resolve) => {
+    const dmcs = loadDMCCache();
 
-  let closestDeltaE = 100;
-  let closestDMC: DMCColor;
+    let closestDeltaE = 100;
+    let closestDMC: DMCColor;
 
-  dmcs.forEach(dmc => {
-    const { hex } = dmc
-    let d = deltaE(hex, color)
-    if (d < closestDeltaE) {
-      closestDeltaE = d;
-      closestDMC = dmc 
-    }
+    dmcs.forEach(dmc => {
+      const { hex } = dmc
+      let d = deltaE(hex, color)
+      if (d < closestDeltaE) {
+        closestDeltaE = d;
+        closestDMC = dmc 
+      }
+    })
+
+    resolve(closestDMC!);
   })
+}
 
-  return closestDMC!;
+const textColor = (color: HexColor): HexColor => {
+  return chroma(color).luminance() > 0.5 ? '#000000' : '#FFFFFF'
 }
 
 export { 
-  closestDMC
+  closestDMC,
+  textColor
 }

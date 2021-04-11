@@ -3,6 +3,7 @@ import React from 'react';
 interface StitchProps {
   x: number;
   y: number;
+  colorKey?: string;
   size?: number;
   thickness?: number;
   className?: string;
@@ -12,6 +13,7 @@ interface StitchProps {
 const Stitch: React.FC<StitchProps> = ({
   x,
   y,
+  colorKey = '',
   size = 10,
   thickness = 2,
   className = '',
@@ -42,6 +44,15 @@ const Stitch: React.FC<StitchProps> = ({
       displayAs === 'Pattern' && (
         <g className={className}>
           <rect x={x*size} y={y*size} width={size} height={size} /> 
+          <text
+            x={x*size + size/2}
+            y={y*size + size/2}
+            fontSize={size/2 + 2}
+            textAnchor="middle"
+            dominantBaseline="middle"
+          >
+            {colorKey}
+          </text>
         </g>
       )
     }

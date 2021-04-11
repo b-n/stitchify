@@ -2492,6 +2492,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash.chunk@npm:^4.2.6":
+  version: 4.2.6
+  resolution: "@types/lodash.chunk@npm:4.2.6"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 23486c05bebb2dea9381f84b3936423d19a2978743ada0b279e0d7ced1522910819428d4239df6f4e126fec2a8374cd8158a18f98c17241b8ca6b65b9c18070e
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.14.168
+  resolution: "@types/lodash@npm:4.14.168"
+  checksum: 9a4e25f89fc035b9f0388f1f7be85e5eff49f9e6db0d93432c9a89fce0916f8a89db4e8290415f7ea02de6b00d3573826378dcb655b7b2d20530a6e8d6dd6fd0
+  languageName: node
+  linkType: hard
+
 "@types/minimatch@npm:*":
   version: 3.0.3
   resolution: "@types/minimatch@npm:3.0.3"
@@ -9665,6 +9681,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"lodash.chunk@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "lodash.chunk@npm:4.2.0"
+  checksum: c037c4a5217a9bd15b459e9666f80c720cf097f35ed18d9bdb129f13b697b631a9be29f3eb926f39afd06b500f717c5a37e95056aaa4b561cf3df71d2f56d882
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -13971,12 +13994,14 @@ resolve@1.18.1:
     "@testing-library/user-event": ^12.1.10
     "@types/chroma-js": ^2.1.3
     "@types/jest": ^26.0.15
+    "@types/lodash.chunk": ^4.2.6
     "@types/node": ^12.0.0
     "@types/react": ^17.0.0
     "@types/react-dom": ^17.0.0
     chroma-js: ^2.1.1
     eslint-config-react-app: ^6.0.0
     gh-pages: ^3.1.0
+    lodash.chunk: ^4.2.0
     react: ^17.0.2
     react-dom: ^17.0.2
     react-scripts: 4.0.3

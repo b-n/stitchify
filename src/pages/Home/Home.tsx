@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { Button, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 
-import Stitch from '../../components/stitch';
+import ImageSelection from '../common/ImageSelection';
+import Stitch from '../common/Stitch';
 import SVGViewer from '../common/SVGViewer'
+import ThreadLegend from '../common/ThreadLegend';
+
+import Options, { GenerationOptions, INITIAL_OPTIONS } from './Options';
+import Welcome from './Welcome';
 
 import { ImageReader } from '../../lib/imageReader';
 import { closestDMC } from '../../lib/color';
-
-import Welcome from './Welcome';
-import Options, { GenerationOptions, INITIAL_OPTIONS } from './Options';
-import ImageSelection from './ImageSelection';
+import { toBase } from '../../lib/toBase';
 
 import { TwoDimensions } from '../../types/util'
+import { StitchData } from '../../types/stitches'
 
 import 'styles/dmc.css'
 
@@ -35,7 +38,7 @@ const getAutoRatioDimensions = (imageDimensions: TwoDimensions, targetDimensions
 
 const Home: React.FC = () => {
   const [options, setOptions] = useState<GenerationOptions>(INITIAL_OPTIONS)
-  const [stitches, setStitches] = useState<Array<React.ReactNode>>([]);
+  const [stitches, setStitches] = useState<Array<StitchData>>([]);
   const [canGenerate, setCanGenerate] = useState(false);
   const classes = useStyles();
 
@@ -47,30 +50,25 @@ const Home: React.FC = () => {
         ...options,
         targetDimensions: getAutoRatioDimensions(imageReader.dimensions!, options.targetDimensions)
       })
-      console.log('setting options', options)
     }
     setCanGenerate(true);
   }
 
-  const generateStitches = () => {
+  const generateStitches = async () => {
     const [ width, height ] = options.targetDimensions;
 
-    const elements = Array.from(Array(width * height), (_, i) => {
+    Promise.all(Array.from(Array(width * height), async (_, i) => {
       const [x, y] = [i % width, Math.floor(i / width)]
-      const dmcColor = closestDMC(imageReader.pixel(x, y, options.targetDimensions))
+      return closestDMC(imageReader.pixel(x, y, options.targetDimensions))
+        .then((dmc) => ({ x, y, dmc }) as StitchData)
+    }))
+      .then(result => {
+        const colorKeys = Object.keys(result.reduce((a, c) => { a[c.dmc.id] = ''; return a; }, {} as Record<string, string>))
+          .reduce((a, c, i) => { a[c] = i; return a }, {} as Record<string, number>)
 
-      return (
-        <Stitch
-          key={i}
-          displayAs={options.displayAs}
-          className={`dmc-color-${dmcColor.id}`}
-          x={x}
-          y={y}
-        />
-      )
-    })
-
-    setStitches(elements)
+        return result.map(d => ({ ...d, key: toBase(colorKeys[d.dmc.id])}))
+      })
+      .then(setStitches)
   }
 
   return (
@@ -104,9 +102,19 @@ const Home: React.FC = () => {
             <svg
               width={options.stitchSize*options.targetDimensions[0]}
               height={options.stitchSize*options.targetDimensions[1]}>
-              {stitches && stitches}
+              {stitches && stitches.map((stitch, i) => (
+                <Stitch
+                  key={i}
+                  displayAs={options.displayAs}
+                  className={`dmc-color-${stitch.dmc.id}`}
+                  colorKey={stitch.key}
+                  x={stitch.x}
+                  y={stitch.y}
+                />
+              ))}
             </svg>
           </SVGViewer>
+          <ThreadLegend data={stitches} />
         </Paper>
       </Grid>
     </Container>
