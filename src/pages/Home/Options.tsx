@@ -1,23 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import {Checkbox, FormControlLabel, Grid, makeStyles, Paper, TextField, Typography} from '@material-ui/core';
+import React from 'react';
+import {Switch, FormControlLabel, Grid, makeStyles, Paper, TextField, Typography, Select, MenuItem, InputLabel, FormControl} from '@material-ui/core';
 
 import { TwoDimensions } from '../../types/util';
 
+type DisplayOptions = 'Stitches' | 'Pattern'
 export interface GenerationOptions {
   targetDimensions: TwoDimensions;
   autoAdjustAspectRatio: boolean;
   stitchSize: number;
+  displayAs: DisplayOptions;
 }
+
 
 export const INITIAL_OPTIONS: GenerationOptions = { 
   targetDimensions: [100, 100],
   autoAdjustAspectRatio: true,
   stitchSize: 10,
+  displayAs: 'Stitches',
 }
 
-interface OptionsProps extends GenerationOptions {
+interface OptionsProps {
   onChange: (options: GenerationOptions) => void;
+  options: GenerationOptions;
 }
+
+const displayAsOptions = [ 'Stitches', 'Pattern' ]
 
 const useStyles = makeStyles({
   container: {
@@ -32,36 +39,34 @@ const useStyles = makeStyles({
 })
 
 const Options: React.FC<OptionsProps> = ({
-  targetDimensions,
-  autoAdjustAspectRatio,
-  stitchSize,
+  options,
   onChange,
 }) => {
   const classes = useStyles();
 
-  const [options, setOptions] = useState<GenerationOptions>({
-    targetDimensions,
-    autoAdjustAspectRatio,
-    stitchSize,
-  });
-
-  useEffect(() => {
-    onChange(options)
-  }, [options, onChange])
-
   const handleChange = (element: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target
+    const { value, checked } = event.target
     switch (element) {
       case 'width':
-        setOptions({ ...options, targetDimensions: [parseInt(value), options.targetDimensions[1]] })
+        onChange({ ...options, targetDimensions: [ parseInt(value), options.targetDimensions[1] ]})
         break;
       case 'height':
-        setOptions({ ...options, targetDimensions: [options.targetDimensions[0], parseInt(value)] })
+        onChange({ ...options, targetDimensions: [ options.targetDimensions[0], parseInt(value) ]})
         break;
       case 'autoAdjust':
-        setOptions({ ...options, autoAdjustAspectRatio: event.target.checked })
+        onChange({ ...options, autoAdjustAspectRatio: checked })
         break;
     } 
+  }
+
+  const handleSelectChange = (element: string) => (event: React.ChangeEvent<{ value: unknown }>) => {
+    const { value } = event.target
+    switch(element) {
+      case 'displayAs':
+        const displayAs = value as DisplayOptions
+        onChange({ ...options, displayAs })
+        break;
+    }
   }
 
   return (
@@ -72,8 +77,9 @@ const Options: React.FC<OptionsProps> = ({
             Options
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid container item xs={12} spacing={4}>
           <Grid container item xs={6} direction="column">
+            <Typography variant="overline">Dimensions</Typography>
             <TextField
               label="Width"
               value={options.targetDimensions[0]}
@@ -86,16 +92,31 @@ const Options: React.FC<OptionsProps> = ({
               onChange={handleChange('height')}
               className={classes.control}
             />
+          </Grid>
+          <Grid container item xs={6} direction="column">
+            <Typography variant="overline">Generation Options</Typography>
+            <FormControl>
+              <InputLabel id="displayAs">Display As</InputLabel>
+              <Select
+                label="Display As"
+                value={options.displayAs}
+                labelId="displayAs"
+                onChange={handleSelectChange('displayAs')}
+              >
+                {displayAsOptions.map((value) => (
+                  <MenuItem value={value} key={value}>{value}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <FormControlLabel
               control={
-                <Checkbox
-                  label="Keep Aspect Ratio"
+                <Switch
                   checked={options.autoAdjustAspectRatio}
                   onChange={handleChange('autoAdjust')}
-                  className={classes.control}
                 />
               }
-              label="Keep Aspect Ratio"
+              className={classes.control}
+              label="Keep Image Aspect Ratio"
             />
           </Grid>
         </Grid>

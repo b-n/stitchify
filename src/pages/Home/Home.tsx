@@ -47,6 +47,7 @@ const Home: React.FC = () => {
         ...options,
         targetDimensions: getAutoRatioDimensions(imageReader.dimensions!, options.targetDimensions)
       })
+      console.log('setting options', options)
     }
     setCanGenerate(true);
   }
@@ -58,7 +59,15 @@ const Home: React.FC = () => {
       const [x, y] = [i % width, Math.floor(i / width)]
       const dmcColor = closestDMC(imageReader.pixel(x, y, options.targetDimensions))
 
-      return (<Stitch key={i} className={`dmc-color-${dmcColor.id}`} x={x} y={y} />)
+      return (
+        <Stitch
+          key={i}
+          displayAs={options.displayAs}
+          className={`dmc-color-${dmcColor.id}`}
+          x={x}
+          y={y}
+        />
+      )
     })
 
     setStitches(elements)
@@ -73,22 +82,22 @@ const Home: React.FC = () => {
         <Grid item>
           <Options 
             onChange={setOptions}
-            {...options}
+            options={options}
           />
         </Grid>
         <Grid item>
           <ImageSelection onChange={loadImageData} />
         </Grid>
-        <Grid item alignContent="flex-end">
-            <Button
-              className={classes.cta}
-              variant="contained"
-              color="primary"
-              disabled={!canGenerate}
-              onClick={() => { generateStitches() }}
-            >
-              Generate
-            </Button>
+        <Grid item>
+          <Button
+            className={classes.cta}
+            variant="contained"
+            color="primary"
+            disabled={!canGenerate}
+            onClick={() => { generateStitches() }}
+          >
+            Generate
+          </Button>
         </Grid>
         <Paper>
           <SVGViewer>
